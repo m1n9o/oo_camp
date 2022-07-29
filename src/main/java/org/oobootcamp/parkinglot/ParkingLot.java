@@ -4,24 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingLot {
-    private int vacancies;
-    private List<Car> parkedCars = new ArrayList<>();
+    private final int maxParkingSpace;
+    private final List<Car> parkedCars = new ArrayList<>();
 
-    public ParkingLot(int vacants) {
-        this.vacancies = vacants;
+    public ParkingLot(int maxParkingSpace) {
+        this.maxParkingSpace = maxParkingSpace;
     }
 
-    public Ticket park(Car car) {
-        if (vacancies == 0) {
-            return null;
+    public Ticket park(Car car) throws ParkingLotFullException {
+        if (parkedCars.size() == maxParkingSpace) {
+            throw new ParkingLotFullException();
         }
         parkedCars.add(car);
-        vacancies -= 1;
         return new Ticket(car.getCarNumber());
-    }
-
-    public int getVacancies() {
-        return vacancies;
     }
 
     public Car pickUpCar(Ticket ticket) {
@@ -31,7 +26,6 @@ public class ParkingLot {
         }
         for(Car car : parkedCars) {
             if (ticket.getCarNumber().equals(car.getCarNumber())) {
-                vacancies += 1;
                 return car;
             }
         }
