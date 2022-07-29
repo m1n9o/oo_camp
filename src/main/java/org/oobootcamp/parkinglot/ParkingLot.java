@@ -19,16 +19,13 @@ public class ParkingLot {
         return new Ticket(car.getCarNumber());
     }
 
-    public Car pickUpCar(Ticket ticket) {
-        if (ticket == null)
-        {
-            return null;
-        }
+    public Car pickUp(Ticket ticket) throws InvalidTicketException {
         for(Car car : parkedCars) {
             if (ticket.getCarNumber().equals(car.getCarNumber())) {
+                parkedCars.remove(car);
                 return car;
             }
         }
-        return null;
+        throw new InvalidTicketException();
     }
 }

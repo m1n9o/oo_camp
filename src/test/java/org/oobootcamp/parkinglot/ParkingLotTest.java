@@ -2,7 +2,8 @@ package org.oobootcamp.parkinglot;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingLotTest {
 
@@ -36,33 +37,40 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_pick_up_car_and_11_left_when_pickUpCar_given_ticket_and_10_vacants() throws ParkingLotFullException {
-        ParkingLot parkingLot = new ParkingLot(11);
+    void should_pick_up_car_successfully_when_pick_up_given_valid_ticket() throws ParkingLotFullException, InvalidTicketException {
+        ParkingLot parkingLot = new ParkingLot(2);
+
+        Car car = new Car("陕A 88888");
+        Ticket ticket = parkingLot.park(car);
+
+        assertEquals(car, parkingLot.pickUp(ticket));
+    }
+
+    @Test
+    void should_notice_invalid_ticket_when_pickUp_given_the_car_of_ticket_not_in_this_parking_lot() throws ParkingLotFullException {
+        ParkingLot parkingLot = new ParkingLot(2);
+        parkingLot.park(new Car("陕A 88888"));
+
+        assertThrows(
+                InvalidTicketException.class,
+                () -> parkingLot.pickUp(new Ticket("陕A 99999")),
+                "invalid ticket"
+        );
+    }
+
+    @Test
+    void should_notice_invalid_ticket_when_pick_up_given_the_ticket_already_used_successfully() throws ParkingLotFullException, InvalidTicketException {
+        ParkingLot parkingLot = new ParkingLot(2);
         String carNumber = "陕A 88888";
         Car car = new Car(carNumber);
         Ticket ticket = parkingLot.park(car);
 
-        assertEquals(car, parkingLot.pickUpCar(ticket));
-    }
+        parkingLot.pickUp(ticket);
 
-    @Test
-    void should_pick_up_nothing_and_10_left_when_pickUpCar_given_ticket_and_10_vacants() throws ParkingLotFullException {
-        ParkingLot parkingLot = new ParkingLot(11);
-        String carNumber = "陕A 88888";
-        Car car = new Car(carNumber);
-
-        parkingLot.park(car);
-
-        assertNull(parkingLot.pickUpCar(new Ticket("陕U 88888")));
-    }
-
-    @Test
-    void should_pick_up_nothing_and_10_left_when_pickUpCar_given_no_ticket_and_10_vacants() throws ParkingLotFullException {
-        ParkingLot parkingLot = new ParkingLot(11);
-        String carNumber = "陕A 88888";
-        Car car = new Car(carNumber);
-        parkingLot.park(car);
-
-        assertNull(parkingLot.pickUpCar(null));
+        assertThrows(
+                InvalidTicketException.class,
+                () -> parkingLot.pickUp(ticket),
+                "invalid ticket"
+        );
     }
 }
