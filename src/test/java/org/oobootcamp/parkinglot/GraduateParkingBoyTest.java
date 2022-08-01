@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GraduateParkingBoyTest {
     @Test
-    void should_get_ticket_when_park_given_2_parking_lots_and_1_left_in_A_and_1_left_in_B() throws ParkingLotFullException {
+    void should_get_ticket_when_park_given_2_parking_lots_A_B_in_order_and_1_left_in_A_and_1_left_in_B() throws ParkingLotFullException {
         ParkingLot parkingLotA = new ParkingLot("A", 1);
         ParkingLot parkingLotB = new ParkingLot("B", 1);
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB));
@@ -22,7 +22,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_get_ticket_when_park_given_2_parking_lots_and_0_left_in_A_and_1_left_in_B() throws ParkingLotFullException {
+    void should_get_ticket_when_park_given_2_parking_lots_A_B_in_order_and_0_left_in_A_and_1_left_in_B() throws ParkingLotFullException {
         ParkingLot parkingLotA = new ParkingLot("A", 1);
         ParkingLot parkingLotB = new ParkingLot("B", 1);
 
@@ -38,7 +38,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_get_ticket_when_park_given_2_parking_lots_and_1_left_in_A_and_0_left_in_B() throws ParkingLotFullException {
+    void should_get_ticket_when_park_given_2_parking_lots_A_B_in_order_and_1_left_in_A_and_0_left_in_B() throws ParkingLotFullException {
         ParkingLot parkingLotA = new ParkingLot("A", 1);
         ParkingLot parkingLotB = new ParkingLot("B", 1);
 
@@ -54,7 +54,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_notice_parking_lot_is_full_when_park_given_2_parking_lots_and_0_left_in_A_and_0_left_in_B() throws ParkingLotFullException {
+    void should_notice_parking_lot_is_full_when_park_given_2_parking_lots_A_B_in_order_and_0_left_in_A_and_0_left_in_B() throws ParkingLotFullException {
         ParkingLot parkingLotA = new ParkingLot("A", 1);
         ParkingLot parkingLotB = new ParkingLot("B", 1);
         parkingLotA.park(new Car("陕A 88888"));
