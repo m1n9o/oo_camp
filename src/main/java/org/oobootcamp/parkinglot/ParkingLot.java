@@ -38,4 +38,13 @@ public class ParkingLot {
     public String getParkingLotID() {
         return parkingLotID;
     }
+
+    public boolean contains(Ticket ticket) {
+        for(Car car : parkedCars) {
+            if (ticket.getCarNumber().equals(car.getCarNumber())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
