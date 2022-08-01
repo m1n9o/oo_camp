@@ -11,7 +11,7 @@ public class GraduateParkingBoy {
 
     public Ticket park(Car car) throws ParkingLotFullException {
         for (ParkingLot parkinglot: parkingLots) {
-            if (!parkinglot.isParkingLotFull()) {
+            if (!parkinglot.isFull()) {
                 return parkinglot.park(car);
             }
         }

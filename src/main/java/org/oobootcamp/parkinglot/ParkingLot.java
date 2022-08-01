@@ -14,14 +14,14 @@ public class ParkingLot {
     }
 
     public Ticket park(Car car) throws ParkingLotFullException {
-        if (isParkingLotFull()) {
+        if (isFull()) {
             throw new ParkingLotFullException();
         }
         parkedCars.add(car);
         return new Ticket(car.getCarNumber(), parkingLotID);
     }
 
-    public boolean isParkingLotFull() {
+    public boolean isFull() {
         return parkedCars.size() == maxParkingSpace;
     }
 
