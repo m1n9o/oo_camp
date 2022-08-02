@@ -1,41 +1,38 @@
 package org.oobootcamp.parkinglot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ParkingLot {
-    private final String parkingLotID;
     private final int maxParkingSpace;
-    private final List<Car> parkedCars = new ArrayList<>();
-
-    public ParkingLot(String parkingLotID, int maxParkingSpace) {
-        this.parkingLotID = parkingLotID;
-        this.maxParkingSpace = maxParkingSpace;
+    private final Map<Ticket, Car> ticketCarMap = new HashMap<>();
+    public ParkingLot(int capacity) {
+        this.maxParkingSpace = capacity;
     }
 
     public Ticket park(Car car) throws ParkingLotFullException {
-        if (isParkingLotFull()) {
+        if (isFull()) {
             throw new ParkingLotFullException();
         }
-        parkedCars.add(car);
-        return new Ticket(car.getCarNumber(), parkingLotID);
+        Ticket ticket = new Ticket();
+        ticketCarMap.put(ticket, car);
+        return ticket;
     }
 
-    public boolean isParkingLotFull() {
-        return parkedCars.size() == maxParkingSpace;
+    public boolean isFull() {
+        return ticketCarMap.size() == maxParkingSpace;
     }
 
     public Car pickUp(Ticket ticket) throws InvalidTicketException {
-        for(Car car : parkedCars) {
-            if (ticket.getCarNumber().equals(car.getCarNumber())) {
-                parkedCars.remove(car);
-                return car;
-            }
+        if (ticketCarMap.containsKey(ticket)) {
+            return ticketCarMap.remove(ticket);
         }
         throw new InvalidTicketException();
     }
 
-    public String getParkingLotID() {
-        return parkingLotID;
+    public boolean contains(Ticket ticket) {
+        return ticketCarMap.containsKey(ticket);
     }
 }

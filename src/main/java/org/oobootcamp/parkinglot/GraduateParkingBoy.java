@@ -11,7 +11,7 @@ public class GraduateParkingBoy {
 
     public Ticket park(Car car) throws ParkingLotFullException {
         for (ParkingLot parkinglot: parkingLots) {
-            if (!parkinglot.isParkingLotFull()) {
+            if (!parkinglot.isFull()) {
                 return parkinglot.park(car);
             }
         }
@@ -20,10 +20,8 @@ public class GraduateParkingBoy {
 
     public Car pickUp(Ticket ticket) throws InvalidTicketException {
         for (ParkingLot parkinglot: parkingLots) {
-            try {
+            if (parkinglot.contains(ticket)){
                 return parkinglot.pickUp(ticket);
-            } catch (InvalidTicketException e) {
-                e.printStackTrace();
             }
         }
         throw new InvalidTicketException();
