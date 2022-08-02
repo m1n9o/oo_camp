@@ -1,15 +1,13 @@
 package org.oobootcamp.parkinglot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ParkingLot {
-    private final int maxParkingSpace;
+    private final int capacity;
     private final Map<Ticket, Car> ticketCarMap = new HashMap<>();
     public ParkingLot(int capacity) {
-        this.maxParkingSpace = capacity;
+        this.capacity = capacity;
     }
 
     public Ticket park(Car car) throws ParkingLotFullException {
@@ -21,8 +19,10 @@ public class ParkingLot {
         return ticket;
     }
 
+    public int vacancies() {return capacity - ticketCarMap.size();}
+
     public boolean isFull() {
-        return ticketCarMap.size() == maxParkingSpace;
+        return ticketCarMap.size() == capacity;
     }
 
     public Car pickUp(Ticket ticket) throws InvalidTicketException {
