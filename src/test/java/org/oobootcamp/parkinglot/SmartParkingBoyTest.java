@@ -1,6 +1,8 @@
 package org.oobootcamp.parkinglot;
 
 import org.junit.jupiter.api.Test;
+import org.oobootcamp.parkinglot.exception.InvalidTicketException;
+import org.oobootcamp.parkinglot.exception.ParkingLotFullException;
 
 import java.util.List;
 

@@ -1,5 +1,8 @@
 package org.oobootcamp.parkinglot;
 
+import org.oobootcamp.parkinglot.exception.InvalidTicketException;
+import org.oobootcamp.parkinglot.exception.ParkingLotFullException;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -25,11 +28,10 @@ public class GraduateParkingBoy {
     }
 
     public Car pickUp(Ticket ticket) throws InvalidTicketException {
-        for (ParkingLot parkinglot: parkingLots) {
-            if (parkinglot.contains(ticket)){
-                return parkinglot.pickUp(ticket);
-            }
-        }
-        throw new InvalidTicketException();
+        return parkingLots.stream()
+                .filter(parkingLot -> parkingLot.contains(ticket))
+                .map(parkingLot -> parkingLot.pickUp(ticket))
+                .findFirst()
+                .orElseThrow(InvalidTicketException::new);
     }
 }
