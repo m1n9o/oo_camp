@@ -1,6 +1,8 @@
 package org.oobootcamp.parkinglot;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class GraduateParkingBoy {
     private final List<ParkingLot> parkingLots;
@@ -10,12 +12,16 @@ public class GraduateParkingBoy {
     }
 
     public Ticket park(Car car) throws ParkingLotFullException {
-        for (ParkingLot parkinglot: parkingLots) {
-            if (!parkinglot.isFull()) {
-                return parkinglot.park(car);
-            }
-        }
-        throw new ParkingLotFullException();
+        ParkingLot parkingLot = parkingLots.stream()
+                .filter(Predicate.not(ParkingLot::isFull))
+                .max(parkingLotComparator())
+                .orElseThrow(ParkingLotFullException::new);
+
+        return parkingLot.park(car);
+    }
+
+    public Comparator<ParkingLot> parkingLotComparator() {
+        return (p1, p2) -> 0;
     }
 
     public Car pickUp(Ticket ticket) throws InvalidTicketException {
