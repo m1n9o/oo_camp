@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GraduateParkingBoyTest {
     @Test
-    void should_get_ticket_when_park_given_1_parking_lot_A_and_1_left_in_A() throws ParkingLotFullException, InvalidTicketException {
+    void should_get_ticket_when_park_given_1_parking_lot_A_and_1_left_in_A() {
         ParkingLot parkingLotA = new ParkingLot(1);
 
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA));
@@ -22,7 +22,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_get_ticket_when_park_given_2_parking_lots_A_B_in_order_and_1_left_in_A_and_1_left_in_B() throws ParkingLotFullException, InvalidTicketException {
+    void should_get_ticket_when_park_given_2_parking_lots_A_B_in_order_and_1_left_in_A_and_1_left_in_B() {
         ParkingLot parkingLotA = new ParkingLot(1);
         ParkingLot parkingLotB = new ParkingLot(1);
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB));
@@ -34,7 +34,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_get_ticket_when_park_given_2_parking_lots_A_B_in_order_and_0_left_in_A_and_1_left_in_B() throws ParkingLotFullException, InvalidTicketException {
+    void should_get_ticket_when_park_given_2_parking_lots_A_B_in_order_and_0_left_in_A_and_1_left_in_B() {
         ParkingLot parkingLotA = new ParkingLot(1);
         ParkingLot parkingLotB = new ParkingLot(1);
         parkingLotA.park(new Car());
@@ -47,7 +47,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_get_ticket_when_park_given_2_parking_lots_A_B_in_order_and_1_left_in_A_and_0_left_in_B() throws ParkingLotFullException, InvalidTicketException {
+    void should_get_ticket_when_park_given_2_parking_lots_A_B_in_order_and_1_left_in_A_and_0_left_in_B() {
         ParkingLot parkingLotA = new ParkingLot(1);
         ParkingLot parkingLotB = new ParkingLot( 1);
         parkingLotB.park(new Car());
@@ -71,13 +71,12 @@ public class GraduateParkingBoyTest {
 
         assertThrows(
                 ParkingLotFullException.class,
-                () -> graduateParkingBoy.park(new Car()),
-                "parking lot is full"
+                () -> graduateParkingBoy.park(new Car())
         );
     }
 
     @Test
-    void should_pick_up_car_successfully_when_pick_up_given_the_car_of_ticket_in_parking_lot_A() throws ParkingLotFullException, InvalidTicketException {
+    void should_pick_up_car_successfully_when_pick_up_given_the_car_of_ticket_in_parking_lot_A() {
         ParkingLot parkingLotA = new ParkingLot(1);
         ParkingLot parkingLotB = new ParkingLot(1);
 
@@ -98,13 +97,12 @@ public class GraduateParkingBoyTest {
 
         assertThrows(
                 InvalidTicketException.class,
-                () -> graduateParkingBoy.pickUp(new Ticket()),
-                "invalid ticket"
+                () -> graduateParkingBoy.pickUp(new Ticket())
         );
     }
 
     @Test
-    void should_notice_invalid_ticket_when_pick_up_given_the_ticket_already_used_successfully() throws ParkingLotFullException, InvalidTicketException {
+    void should_notice_invalid_ticket_when_pick_up_given_the_ticket_already_used_successfully() {
         ParkingLot parkingLotA = new ParkingLot(1);
         ParkingLot parkingLotB = new ParkingLot(1);
 
@@ -116,8 +114,7 @@ public class GraduateParkingBoyTest {
 
         assertThrows(
                 InvalidTicketException.class,
-                () -> graduateParkingBoy.pickUp(ticket),
-                "invalid ticket"
+                () -> graduateParkingBoy.pickUp(ticket)
         );
     }
 }

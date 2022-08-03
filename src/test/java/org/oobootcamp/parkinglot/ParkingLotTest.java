@@ -1,5 +1,6 @@
 package org.oobootcamp.parkinglot;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.oobootcamp.parkinglot.exception.InvalidTicketException;
 import org.oobootcamp.parkinglot.exception.ParkingLotFullException;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ParkingLotTest {
 
     @Test
-    void should_get_parking_ticket_when_park_given_1_vacancy_left() throws ParkingLotFullException {
+    void should_get_parking_ticket_when_park_given_1_vacancy_left() {
         ParkingLot parkingLot = new ParkingLot(2);
         parkingLot.park(new Car());
 
@@ -20,7 +21,7 @@ public class ParkingLotTest {
     }
 
     @Test()
-    void should_notice_parking_lot_is_full_when_park_given_0_vacancy_left() throws ParkingLotFullException {
+    void should_notice_parking_lot_is_full_when_park_given_0_vacancy_left() {
         ParkingLot parkingLot = new ParkingLot(2);
         parkingLot.park(new Car());
         parkingLot.park(new Car());
@@ -29,14 +30,13 @@ public class ParkingLotTest {
 
         assertThrows(
                 ParkingLotFullException.class,
-                () -> parkingLot.park(car),
-                "parking lot is full"
+                () -> parkingLot.park(car)
         );
 
     }
 
     @Test
-    void should_pick_up_car_successfully_when_pick_up_given_valid_ticket() throws ParkingLotFullException, InvalidTicketException {
+    void should_pick_up_car_successfully_when_pick_up_given_valid_ticket() {
         ParkingLot parkingLot = new ParkingLot(2);
 
         Car car = new Car();
@@ -46,14 +46,13 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_notice_invalid_ticket_when_pickUp_given_the_car_of_ticket_not_in_this_parking_lot() throws ParkingLotFullException {
+    void should_notice_invalid_ticket_when_pickUp_given_the_car_of_ticket_not_in_this_parking_lot() {
         ParkingLot parkingLot = new ParkingLot(2);
         parkingLot.park(new Car());
 
         assertThrows(
                 InvalidTicketException.class,
-                () -> parkingLot.pickUp(new Ticket()),
-                "invalid ticket"
+                () -> parkingLot.pickUp(new Ticket())
         );
     }
 
@@ -67,8 +66,7 @@ public class ParkingLotTest {
 
         assertThrows(
                 InvalidTicketException.class,
-                () -> parkingLot.pickUp(ticket),
-                "invalid ticket"
+                () -> parkingLot.pickUp(ticket)
         );
     }
 }

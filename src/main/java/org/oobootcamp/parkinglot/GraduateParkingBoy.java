@@ -10,7 +10,7 @@ public class GraduateParkingBoy extends ParkingBoy {
     }
 
     @Override
-    public Comparator<ParkingLot> parkingLotComparator() {
+    protected Comparator<ParkingLot> parkingLotComparator() {
         return (p1, p2) -> 0;
     }
 }

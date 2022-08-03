@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static java.util.function.Predicate.not;
+
 public abstract class ParkingBoy {
     private final List<ParkingLot> parkingLots;
 
@@ -16,14 +18,14 @@ public abstract class ParkingBoy {
 
     public Ticket park(Car car) throws ParkingLotFullException {
         ParkingLot parkingLot = parkingLots.stream()
-                .filter(Predicate.not(ParkingLot::isFull))
+                .filter(not(ParkingLot::isFull))
                 .max(parkingLotComparator())
                 .orElseThrow(ParkingLotFullException::new);
 
         return parkingLot.park(car);
     }
 
-    public abstract Comparator<ParkingLot> parkingLotComparator();
+    protected abstract Comparator<ParkingLot> parkingLotComparator();
 
     public Car pickUp(Ticket ticket) throws InvalidTicketException {
         return parkingLots.stream()
