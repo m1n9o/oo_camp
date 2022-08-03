@@ -1,11 +1,9 @@
 package org.oobootcamp.parkinglot;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
 
-public class SmartParkingBoy extends GraduateParkingBoy{
+public class SmartParkingBoy extends ParkingBoy {
 
     public SmartParkingBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
