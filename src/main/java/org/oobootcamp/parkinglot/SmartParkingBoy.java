@@ -10,7 +10,7 @@ public class SmartParkingBoy extends ParkingBoy {
     }
 
     @Override
-    public Comparator<ParkingLot> parkingLotComparator() {
+    protected Comparator<ParkingLot> parkingLotComparator() {
         return Comparator.comparingInt(ParkingLot::vacancies);
     }
 }
