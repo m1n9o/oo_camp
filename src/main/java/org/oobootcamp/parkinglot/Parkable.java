@@ -7,5 +7,5 @@ public interface Parkable {
 
     Car pickUp(Ticket ticket);
 
-    boolean contains(Ticket ticket);
+    boolean containCarWith(Ticket ticket);
 }

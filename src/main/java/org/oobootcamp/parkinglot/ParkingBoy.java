@@ -5,7 +5,6 @@ import org.oobootcamp.parkinglot.exception.ParkingLotFullException;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
 
 import static java.util.function.Predicate.not;
 
@@ -32,16 +31,16 @@ public abstract class ParkingBoy implements Parkable{
     }
 
     @Override
-    public boolean contains(Ticket ticket) {
+    public boolean containCarWith(Ticket ticket) {
         return parkingLots.stream()
-                .anyMatch(parkingLot -> parkingLot.contains(ticket));
+                .anyMatch(parkingLot -> parkingLot.containCarWith(ticket));
     }
 
     protected abstract Comparator<ParkingLot> parkingLotComparator();
 
     public Car pickUp(Ticket ticket) throws InvalidTicketException {
         return parkingLots.stream()
-                .filter(parkingLot -> parkingLot.contains(ticket))
+                .filter(parkingLot -> parkingLot.containCarWith(ticket))
                 .map(parkingLot -> parkingLot.pickUp(ticket))
                 .findFirst()
                 .orElseThrow(InvalidTicketException::new);

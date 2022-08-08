@@ -24,7 +24,7 @@ public class ParkingManager {
 
     public Car pickUp(Ticket ticket) {
         Parkable parkable = parkables.stream()
-                .filter(p -> p.contains(ticket))
+                .filter(p -> p.containCarWith(ticket))
                 .findFirst()
                 .orElseThrow(InvalidTicketException::new);
         return parkable.pickUp(ticket);

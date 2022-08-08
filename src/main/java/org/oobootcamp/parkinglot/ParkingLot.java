@@ -35,7 +35,7 @@ public class ParkingLot implements Parkable{
         throw new InvalidTicketException();
     }
 
-    public boolean contains(Ticket ticket) {
+    public boolean containCarWith(Ticket ticket) {
         return ticketCarMap.containsKey(ticket);
     }
 }
