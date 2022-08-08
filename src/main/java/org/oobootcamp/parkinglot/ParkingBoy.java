@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 
 import static java.util.function.Predicate.not;
 
-public abstract class ParkingBoy {
+public abstract class ParkingBoy implements Parkable{
     private final List<ParkingLot> parkingLots;
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
@@ -23,6 +23,18 @@ public abstract class ParkingBoy {
                 .orElseThrow(ParkingLotFullException::new);
 
         return parkingLot.park(car);
+    }
+
+    @Override
+    public boolean isFull() {
+        return parkingLots.stream()
+                .allMatch(ParkingLot::isFull);
+    }
+
+    @Override
+    public boolean contains(Ticket ticket) {
+        return parkingLots.stream()
+                .anyMatch(parkingLot -> parkingLot.contains(ticket));
     }
 
     protected abstract Comparator<ParkingLot> parkingLotComparator();

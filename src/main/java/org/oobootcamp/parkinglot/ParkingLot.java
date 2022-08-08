@@ -6,7 +6,7 @@ import org.oobootcamp.parkinglot.exception.ParkingLotFullException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParkingLot {
+public class ParkingLot implements Parkable{
     private final int capacity;
     private final Map<Ticket, Car> ticketCarMap = new HashMap<>();
     public ParkingLot(int capacity) {
